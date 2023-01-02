@@ -1,7 +1,8 @@
 from bs4 import BeautifulSoup
 import requests
 
-def findbook(type,pub):
+
+def findbook(type, pub):
     # coming = "coming_soon"
     # new = "new_arrival"
     # book_find = "006485,004827,005459"
@@ -11,19 +12,20 @@ def findbook(type,pub):
 
     url = f"https://www.naiin.com/category?type_book={type}&product_type_id=1&p={pub}"
     page = requests.get(url).text
-    doc = BeautifulSoup(page,"html.parser")
+    doc = BeautifulSoup(page, "html.parser")
 
-    div = doc.find(class_ ="product-list mt15 mb15 view-block grid")
+    div = doc.find(class_="product-list mt15 mb15 view-block grid")
     try:
-        items = div.find_all(class_ = "itemname")
-    except Exception: 
+        items = div.find_all(class_="itemname")
+    except Exception as e:
+        print(e)
         return None
 
-    items3 = div.find_all(class_ = "btn-addtocart-ylw-small")
+    items3 = div.find_all(class_="btn-addtocart-ylw-small")
 
-    list1 =[]
-    list1_link =[]
-    list3 = [] 
+    list1 = []
+    list1_link = []
+    list3 = []
 
     for item in items:
         list1.append(item.string)
@@ -33,11 +35,11 @@ def findbook(type,pub):
         list3.append(i.string)
 
     result = []
-    for x,y,z in zip(list1,list1_link,list3):
+    for x, y, z in zip(list1, list1_link, list3):
         books = {
-            "title":str(x),
-            "link":str(y),
-            "status":str(z)
+            "title": str(x),
+            "link": str(y),
+            "status": str(z)
         }
         result.append(books)
 

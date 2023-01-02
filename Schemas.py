@@ -1,14 +1,16 @@
 from enum import Enum
 
-class TagBook(str,Enum):
-    coming = "Coming"
-    new = "New Arrival"
 
-class Publisher(str,Enum):
+class TagBook(str, Enum):
+    coming_soon = "Coming"
+    new_arrival = "New Arrival"
+
+
+class Publisher(str, Enum):
     phoenix = "Phoenix"
     animag = "Animag"
     firstpage = "Firstpage"
-    all = f"{phoenix},{animag},{firstpage}"
+    all = "ALL"  # f"{phoenix},{animag},{firstpage}"
 
 
 # def convert(data) -> dict:
